@@ -70,6 +70,7 @@ resource "helm_release" "coder_europe" {
     mem_request = local.scenarios[var.scenario].coder.mem_request,
     cpu_limit = local.scenarios[var.scenario].coder.cpu_limit,
     mem_limit = local.scenarios[var.scenario].coder.mem_limit,
+    deployment       = "europe",
   })]
 }
 
@@ -89,16 +90,17 @@ resource "helm_release" "provisionerd_europe" {
     db_secret = null,
     ip_address = null,
     provisionerd_psk = kubernetes_secret.provisionerd_psk_europe.metadata.0.name,
-    access_url = local.deployments.primary.url,
-    node_pool = google_container_node_pool.node_pool["europe_coder"].name,
-    release_name = local.coder_release_name,
-    experiments = var.coder_experiments,
-    image_repo = var.coder_image_repo,
-    image_tag = var.coder_image_tag,
-    replicas = local.scenarios[var.scenario].provisionerd.replicas,
-    cpu_request = local.scenarios[var.scenario].provisionerd.cpu_request,
-    mem_request = local.scenarios[var.scenario].provisionerd.mem_request,
-    cpu_limit = local.scenarios[var.scenario].provisionerd.cpu_limit,
-    mem_limit = local.scenarios[var.scenario].provisionerd.mem_limit,
+    access_url       = local.deployments.primary.url,
+    node_pool        = google_container_node_pool.node_pool["europe_coder"].name,
+    release_name     = local.coder_release_name,
+    experiments      = var.coder_experiments,
+    image_repo       = var.coder_image_repo,
+    image_tag        = var.coder_image_tag,
+    replicas         = local.scenarios[var.scenario].provisionerd.replicas,
+    cpu_request      = local.scenarios[var.scenario].provisionerd.cpu_request,
+    mem_request      = local.scenarios[var.scenario].provisionerd.mem_request,
+    cpu_limit        = local.scenarios[var.scenario].provisionerd.cpu_limit,
+    mem_limit        = local.scenarios[var.scenario].provisionerd.mem_limit,
+    deployment       = "europe",
   })]
 }
